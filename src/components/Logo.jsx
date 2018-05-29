@@ -3,7 +3,7 @@ import logo from '../static/zliska.svg';
 import Morse from '../static/morse.json';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
-import {SVGConverter} from 'svg-dataurl';
+import { SVGConverter } from 'svg-dataurl';
 
 class Logo extends Component {
   constructor(props) {

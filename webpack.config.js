@@ -1,6 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
-const glob = require('glob');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -10,10 +8,9 @@ module.exports = {
     contentBase: './src',
     publicPath: '/build',
   },
-  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.[hash].js',
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -47,6 +44,6 @@ module.exports = {
         from: './src/static/zliska.svg',
         to: 'static'
       }
-    ]),
+    ])
   ]
 };
