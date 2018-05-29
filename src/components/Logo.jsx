@@ -71,7 +71,9 @@ class Logo extends Component {
       var a = document.createElement("a");
       a.download = filename;
       a.href = dataUrl;
+      document.body.appendChild(a);
       a.click();
+      a.remove();
     })
   }
 

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "dev": "webpack-dev-server --hot --inline --open",
+    "dev": "webpack-serve --hot --inline --open",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
@@ -36,7 +36,7 @@
     "style-loader": "^0.21.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^4.9.1",
-    "webpack-cli": "^2.1.4",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-command": "^0.2.0",
+    "webpack-serve": "^1.0.2"
   }
 }
