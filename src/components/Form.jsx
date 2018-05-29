@@ -21,15 +21,11 @@ class Form extends Component {
   }
 
   handleMenuOpen(event) {
-    this.setState({ anchorMenu: event.currentTarget });
-  };
-
-  handleMenuClose() {
-    this.setState({ anchorMenu: null });
+    this.setState({ anchorMenu: event.currentTarget, exportTo: null });
   };
 
   handleNicknameUpdate(event) {
-    this.setState({ nickname: tr(event.target.value) });
+    this.setState({ nickname: tr(event.target.value), exportTo: null });
   }
 
   validateInput(event) {
@@ -47,7 +43,7 @@ class Form extends Component {
     const { anchorMenu } = this.state;
     return (
       <div className="form">
-        <Logo nickname={this.state.nickname} />
+        <Logo nickname={this.state.nickname} exportTo={this.state.exportTo} />
         <Input
           onKeyPress={ (e) => this.validateInput(e) }
           onChange={ (e) => this.handleNicknameUpdate(e) }
@@ -66,10 +62,18 @@ class Form extends Component {
           id="simple-menu"
           anchorEl={anchorMenu}
           open={Boolean(anchorMenu)}
-          onClose={() => this.handleMenuClose()}
+          onClose={() => this.setState({ anchorMenu: null, exportTo: null }) }
         >
-          <MenuItem onClick={() => this.handleMenuClose()}>Exportovat SVG</MenuItem>
-          <MenuItem onClick={() => this.handleMenuClose()}>Exportovat PNG</MenuItem>
+          <MenuItem
+            onClick={() => this.setState({ anchorMenu: null, exportTo: "svg" }) }
+          >
+            Exportovat SVG
+          </MenuItem>
+          <MenuItem
+            onClick={() => this.setState({ anchorMenu: null, exportTo: "png" }) }
+          >
+            Exportovat PNG
+          </MenuItem>
         </Menu>
       </div>
     );

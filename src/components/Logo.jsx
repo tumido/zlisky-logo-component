@@ -3,17 +3,24 @@ import logo from '../static/zliska.svg';
 import Morse from '../static/morse.json';
 import { select } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
+import {SVGConverter} from 'svg-dataurl';
 
 class Logo extends Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
-    this.createLogo()
+    const data = this.stringToMorse("Zlisky");
+
+    this.pushCircleToSvg('#group-name', 600, data);
   }
 
   componentDidUpdate() {
-    this.createNickname()
+    const data = this.stringToMorse(this.props.nickname);
+
+    this.pushCircleToSvg('#member-name', 550, data);
+
+    if (this.props.exportTo) this.exportImage();
   }
 
   stringToMorse(text) {
@@ -52,17 +59,22 @@ class Logo extends Component {
       .attr('transform', 'translate(600, 600)');
   }
 
-  createNickname() {
-    let data = this.stringToMorse(this.props.nickname);
+  exportImage() {
+    const {exportTo, nickname} = this.props;
 
-    this.pushCircleToSvg('#member-name', 550, data);
+    if (exportTo != "svg" && exportTo != "png") return;
+
+    SVGConverter.loadFromElement(select('svg').node()).then((converter) => {
+      const dataUrl = (exportTo == "svg") ? converter.svgDataURL() : converter.pngDataURL();
+      const filename = "zlisky_" + ((this.props.nickname != "") ? this.props.nickname : "logo");
+
+      var a = document.createElement("a");
+      a.download = filename;
+      a.href = dataUrl;
+      a.click();
+    })
   }
 
-  createLogo() {
-    let data = this.stringToMorse("Zlisky");
-
-    this.pushCircleToSvg('#group-name', 600, data);
-  }
 
   render() {
     return (

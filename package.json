@@ -11,11 +11,12 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
+    "svg-dataurl": "^1.0.0",
     "transliteration": "^1.6.2"
   },
   "scripts": {
     "build": "webpack -p",
-    "dev": "webpack-dev-server --hot --inline"
+    "dev": "webpack-dev-server --hot --inline --open"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
