@@ -1,16 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
 const glob = require('glob');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.jsx'),
   devServer: {
     contentBase: './src',
-    publicPath: '/output',
+    publicPath: '/build',
   },
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'output'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
   },
   resolve: {
@@ -29,16 +31,22 @@ module.exports = {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
-      // {
-      //   loader: 'sass-loader',
-      //   options: {
-      //     includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d))
-      //   }
-      // },
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Generátor loga',
+      template: './src/index.html'
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: './src/static/zliska.svg',
+        to: 'static'
+      }
+    ]),
+  ]
 };

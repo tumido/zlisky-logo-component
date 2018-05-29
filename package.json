@@ -1,7 +1,8 @@
 {
-  "name": "personalized-logo",
+  "name": "zlisky-logo-component",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tumido.github.io/zlisky-logo-component",
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
@@ -16,7 +17,9 @@
   },
   "scripts": {
     "build": "webpack -p",
-    "dev": "webpack-dev-server --hot --inline --open"
+    "dev": "webpack-dev-server --hot --inline --open",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -24,7 +27,10 @@
     "babel-plugin-lodash": "^3.3.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "gh-pages": "^1.1.0",
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
