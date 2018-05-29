@@ -69,7 +69,7 @@ class Logo extends Component {
       const filename = "zlisky_" + ((this.props.nickname != "") ? this.props.nickname : "logo");
 
       var a = document.createElement("a");
-      a.download = filename;
+      a.download = filename + "." + exportTo;
       a.href = dataUrl;
       document.body.appendChild(a);
       a.click();
