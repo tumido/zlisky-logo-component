@@ -1,6 +1,7 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.jsx'),
@@ -25,8 +26,18 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.(sass|scss)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'resolve-url-loader',
+            {
+              loader: 'sass-loader',
+            },
+          ],
+        }),
       },
       {
         test: /\.svg$/,
@@ -44,6 +55,9 @@ module.exports = {
         from: './src/static/zliska.svg',
         to: 'static'
       }
-    ])
+    ]),
+    new ExtractTextPlugin({
+      filename: '[name].[hash].css'
+    }),
   ]
 };
